@@ -1386,34 +1386,12 @@
             font-weight: 400;
         }
 
-        /* ── RESPONSIVE ── */
+        /* ══════════════════════════════════════════════════
+           RESPONSIVE — TABLET (≤1024px)
+        ══════════════════════════════════════════════════ */
         @media (max-width: 1024px) {
-            .overview-intro {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
 
-            .steps-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .outputs-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .glossary-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .overview-section {
-                padding: 40px 24px;
-            }
-
-            .how-works-box {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
+            /* Header */
             header {
                 padding: 0 24px;
             }
@@ -1422,9 +1400,25 @@
                 display: none;
             }
 
+            .logo-sub {
+                display: none;
+            }
+
+            /* Hero */
             .hero-section {
                 padding: 40px 24px;
                 grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .hero-section>div:first-child {
+                padding-right: 0;
+                margin-bottom: 28px;
+            }
+
+            .hero-section>div:last-child {
+                padding-left: 0;
+                margin-top: 24px;
             }
 
             .hero-stats-col {
@@ -1432,13 +1426,14 @@
                 border: none;
                 border-top: 1px solid var(--border);
                 border-bottom: 1px solid var(--border);
-                padding: 16px 0;
+                padding: 0;
                 flex-wrap: wrap;
-                gap: 0;
             }
 
             .hero-stat {
-                padding: 12px 16px;
+                padding: 14px 20px;
+                flex: 1;
+                min-width: 120px;
             }
 
             .hero-stat-divider {
@@ -1447,21 +1442,68 @@
                 align-self: stretch;
             }
 
+            /* Main */
             main {
                 padding: 24px;
             }
 
+            /* Overview */
+            .overview-section {
+                padding: 40px 24px;
+            }
+
+            .overview-intro {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .overview-q {
+                position: static;
+                font-size: 1.8rem;
+            }
+
+            .how-works-box {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .outputs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .glossary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Controls */
             .controls-wrap {
                 grid-template-columns: 1fr;
             }
 
-            .ind-grid,
-            .dist-grid {
-                grid-template-columns: 1fr;
+            /* Run row */
+            .run-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
             }
 
+            .run-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .run-meta {
+                text-align: center;
+            }
+
+            /* Results */
             .prob-card {
                 grid-template-columns: 1fr;
+                gap: 24px;
             }
 
             .prob-right {
@@ -1471,24 +1513,298 @@
                 padding-top: 20px;
             }
 
-            .cit-grid {
-                grid-template-columns: 1fr;
-            }
-
-            footer {
-                flex-direction: column;
-                text-align: center;
-                padding: 24px;
-            }
-
             .prob-number {
                 min-width: unset;
                 font-size: clamp(4rem, 18vw, 8rem);
             }
 
+            .ind-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dist-grid {
+                grid-template-columns: 1fr;
+            }
+
             .fan-header {
                 flex-direction: column;
                 gap: 8px;
+            }
+
+            .fan-tabs {
+                width: 100%;
+            }
+
+            .fan-tab {
+                flex: 1;
+                text-align: center;
+            }
+
+            /* Citations */
+            .cit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Footer */
+            footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 24px;
+                gap: 16px;
+            }
+        }
+
+        /* ══════════════════════════════════════════════════
+           RESPONSIVE — MOBILE (≤480px)
+        ══════════════════════════════════════════════════ */
+        @media (max-width: 480px) {
+
+            /* Header */
+            header {
+                padding: 0 16px;
+                height: 52px;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .live-badge {
+                font-size: 0.55rem;
+                letter-spacing: 0.06em;
+            }
+
+            /* Hero */
+            .hero-section {
+                padding: 28px 16px;
+            }
+
+            .hero-title {
+                font-size: clamp(2.6rem, 13vw, 4rem);
+            }
+
+            .hero-stat {
+                padding: 12px 14px;
+            }
+
+            .hero-stat-num {
+                font-size: 1.3rem;
+            }
+
+            .hero-stat-label {
+                font-size: 0.5rem;
+            }
+
+            .hero-stat-sub {
+                display: none;
+            }
+
+            .hero-meta {
+                font-size: 0.68rem;
+                margin-left: 0;
+            }
+
+            .hero-bg-text {
+                display: none;
+            }
+
+            /* Main */
+            main {
+                padding: 16px;
+            }
+
+            /* Overview */
+            .overview-section {
+                padding: 28px 16px;
+            }
+
+            .overview-q {
+                font-size: 1.5rem;
+            }
+
+            .overview-answer {
+                font-size: 0.95rem;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .outputs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .how-works-box {
+                padding: 20px;
+                font-size: 0.95rem;
+            }
+
+            .step-card {
+                padding: 16px;
+            }
+
+            .output-card {
+                padding: 16px;
+            }
+
+            .gloss-item {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .gloss-term {
+                font-size: 0.6rem;
+            }
+
+            /* Controls */
+            .ctrl-card {
+                padding: 16px;
+            }
+
+            .ctrl-val {
+                font-size: 2rem;
+            }
+
+            .ctrl-label {
+                font-size: 0.54rem;
+            }
+
+            /* Bigger pill tap targets */
+            .pill {
+                padding: 10px 16px;
+                font-size: 0.7rem;
+                min-height: 40px;
+            }
+
+            /* Run button */
+            .run-btn {
+                padding: 16px 24px;
+                font-size: 1.1rem;
+            }
+
+            .run-meta {
+                font-size: 0.58rem;
+                line-height: 1.8;
+            }
+
+            /* Overlay */
+            .overlay-dismiss {
+                padding: 14px 32px;
+                font-size: 0.65rem;
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            .overlay-verdict {
+                font-size: 1.8rem;
+            }
+
+            /* Probability card */
+            .prob-number {
+                font-size: clamp(4rem, 20vw, 7rem);
+            }
+
+            .prob-verdict {
+                font-size: 1.4rem;
+            }
+
+            .prob-stats {
+                font-size: 0.6rem;
+                line-height: 1.9;
+            }
+
+            .corr-note {
+                font-size: 0.55rem;
+            }
+
+            /* Summary */
+            .summary-card {
+                padding: 18px 20px;
+            }
+
+            .summary-body {
+                font-size: 0.92rem;
+                line-height: 1.75;
+            }
+
+            /* Indicator cards */
+            .ind-card {
+                padding: 16px;
+            }
+
+            .ind-mean {
+                font-size: 1.8rem;
+            }
+
+            /* Fan tabs — taller tap targets */
+            .fan-tab {
+                padding: 10px 0;
+                font-size: 0.65rem;
+            }
+
+            /* Scenario table — horizontal scroll */
+            .log-card {
+                padding: 16px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .log-card::after {
+                content: '← scroll →';
+                display: block;
+                text-align: center;
+                font-size: 0.55rem;
+                color: var(--muted);
+                margin-top: 10px;
+                letter-spacing: 0.1em;
+            }
+
+            .log-card table {
+                min-width: 520px;
+            }
+
+            .log-title-text {
+                font-size: 0.55rem;
+            }
+
+            th {
+                font-size: 0.52rem;
+                padding: 7px 8px;
+            }
+
+            td {
+                font-size: 0.6rem;
+                padding: 7px 8px;
+            }
+
+            /* Citations */
+            .cit-item {
+                padding: 14px 16px;
+            }
+
+            .cit-desc {
+                font-size: 0.58rem;
+            }
+
+            .cit-intro {
+                font-size: 0.88rem;
+            }
+
+            /* Footer */
+            footer {
+                padding: 20px 16px;
+                font-size: 0.58rem;
+            }
+
+            /* Section headers */
+            .section-header {
+                margin-bottom: 14px;
+            }
+
+            .section-label {
+                font-size: 0.52rem;
+                letter-spacing: 0.18em;
             }
         }
 
