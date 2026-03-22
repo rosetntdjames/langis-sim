@@ -1872,6 +1872,212 @@
         .summary-body .s-green {
             color: var(--green);
         }
+
+        /* ── SCORE BREAKDOWN PANEL ── */
+        .breakdown-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 24px 28px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .breakdown-card.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .breakdown-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .breakdown-label {
+            font-size: 0.56rem;
+            letter-spacing: 0.22em;
+            color: var(--muted);
+            text-transform: uppercase;
+            flex: 1;
+        }
+
+        .breakdown-score-total {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .breakdown-item {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 14px 16px;
+            position: relative;
+        }
+
+        .breakdown-item-label {
+            font-size: 0.55rem;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .breakdown-row {
+            font-size: 0.65rem;
+            color: var(--muted);
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        .breakdown-row strong {
+            color: var(--text);
+            font-weight: 400;
+        }
+
+        .breakdown-row .val {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+        }
+
+        .breakdown-contribution {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            line-height: 1;
+            margin-top: 6px;
+        }
+
+        .breakdown-formula {
+            font-size: 0.6rem;
+            color: var(--muted);
+            font-family: 'IBM Plex Mono', monospace;
+            border-top: 1px solid var(--border);
+            padding-top: 12px;
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        .breakdown-formula strong {
+            color: var(--text);
+            font-weight: 400;
+        }
+
+        .breakdown-formula .verdict {
+            font-weight: 600;
+        }
+
+        /* ── HISTORICAL ANCHORS ── */
+        .history-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 24px 28px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .history-card.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .history-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .history-label {
+            font-size: 0.56rem;
+            letter-spacing: 0.22em;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+
+        .history-sub {
+            font-size: 0.58rem;
+            color: var(--muted);
+            font-family: 'Crimson Pro', serif;
+            font-style: italic;
+            font-weight: 300;
+            margin-bottom: 18px;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history-table th {
+            font-size: 0.55rem;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        .history-table td {
+            font-size: 0.68rem;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border2);
+            font-weight: 300;
+        }
+
+        .history-table tr:last-child td {
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .history-table tr:last-child td {
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        .history-table tr:hover td {
+            background: rgba(255, 255, 255, 0.012);
+        }
+
+        .hist-note {
+            font-size: 0.58rem;
+            color: var(--muted);
+            font-family: 'Crimson Pro', serif;
+            font-style: italic;
+            font-weight: 300;
+            margin-top: 12px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 480px) {
+            .breakdown-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .breakdown-card {
+                padding: 18px 16px;
+            }
+
+            .history-card {
+                padding: 18px 16px;
+                overflow-x: auto;
+            }
+
+            .history-table {
+                min-width: 480px;
+            }
+        }
     </style>
 </head>
 
@@ -2247,8 +2453,8 @@
                 <button class="run-btn" id="run-btn" onclick="runSimulation()">▶ RUN SIMULATION</button>
                 <div class="run-meta">
                     <strong>10,000 CORRELATED SCENARIOS</strong> via Cholesky decomposition<br>
-                    COLLAPSE = WEIGHTED STRESS INDEX ≥ 1.25<br>
-                    INFLATION×0.40 · PESO×0.35 · GDP×0.25
+                    COLLAPSE = WEIGHTED STRESS INDEX ≥ 1.10<br>
+                    INFLATION×0.45 · PESO×0.35 · GDP×0.20
                 </div>
             </div>
 
@@ -2275,10 +2481,9 @@
                         <div class="corr-note">
                             Variables are correlated (ρ<sub>inf,peso</sub> = 0.72 · ρ<sub>inf,gdp</sub> = −0.65 ·
                             ρ<sub>peso,gdp</sub> = −0.58) via Cholesky decomposition. Collapse is determined by a
-                            <strong>weighted composite stress index</strong> — inflation (40%), peso (35%), and GDP
-                            (25%) — normalized to their danger thresholds. A score ≥ 1.25 triggers collapse, meaning the
-                            combined economic stress across all three indicators exceeds critical mass, even if no
-                            single one is catastrophically breached alone.
+                            <strong>weighted composite stress index</strong> — inflation (45%), peso (35%), GDP (20%) —
+                            with collapse triggering at a score ≥ 1.10. The peso component is normalized to ₱75
+                            rather than ₱80, reflecting that severe stress begins well before a full breach.
                         </div>
                     </div>
                 </div>
@@ -2290,6 +2495,120 @@
                         <span class="summary-label">WHAT THIS MEANS IN PLAIN TERMS</span>
                     </div>
                     <div class="summary-body" id="summary-body">—</div>
+                </div>
+
+                <!-- SCORE BREAKDOWN -->
+                <div class="breakdown-card" id="breakdown-card">
+                    <div class="breakdown-header">
+                        <span class="summary-icon">🔢</span>
+                        <span class="breakdown-label">HOW WE GOT THIS NUMBER — SCORE BREAKDOWN</span>
+                        <span class="breakdown-score-total" id="breakdown-total">—</span>
+                    </div>
+                    <div class="breakdown-grid">
+                        <div class="breakdown-item">
+                            <div class="breakdown-item-label">📈 Inflation Component</div>
+                            <div class="breakdown-row">Mean value: <strong id="bd-inf-val">—</strong></div>
+                            <div class="breakdown-row">÷ threshold (10.0%) = <strong id="bd-inf-stress">—</strong></div>
+                            <div class="breakdown-row">× weight (0.45) =</div>
+                            <div class="breakdown-contribution" id="bd-inf-contrib">—</div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-item-label">💱 Peso Component</div>
+                            <div class="breakdown-row">Mean value: <strong id="bd-peso-val">—</strong></div>
+                            <div class="breakdown-row">÷ reference (₱75.0) = <strong id="bd-peso-stress">—</strong>
+                            </div>
+                            <div class="breakdown-row">× weight (0.35) =</div>
+                            <div class="breakdown-contribution" id="bd-peso-contrib">—</div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-item-label">📉 GDP Component</div>
+                            <div class="breakdown-row">Mean value: <strong id="bd-gdp-val">—</strong></div>
+                            <div class="breakdown-row">Stress factor = <strong id="bd-gdp-stress">—</strong></div>
+                            <div class="breakdown-row">× weight (0.20) =</div>
+                            <div class="breakdown-contribution" id="bd-gdp-contrib">—</div>
+                        </div>
+                    </div>
+                    <div class="breakdown-formula" id="breakdown-formula">—</div>
+                </div>
+
+                <!-- HISTORICAL ANCHORS -->
+                <div class="history-card" id="history-card">
+                    <div class="history-header">
+                        <span class="summary-icon">📚</span>
+                        <span class="history-label">HISTORICAL CONTEXT — PAST PHL OIL SHOCKS VS YOUR SIMULATION</span>
+                    </div>
+                    <div class="history-sub">
+                        How do the simulation's projected outcomes compare to what actually happened during past
+                        Philippine oil price crises?
+                    </div>
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Crude Peak</th>
+                                <th>PHL Inflation</th>
+                                <th>Peso/USD</th>
+                                <th>GDP Growth</th>
+                                <th>Outcome</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2008 Global Oil Crisis</td>
+                                <td>$147/bbl</td>
+                                <td style="color:var(--warn)">9.3%</td>
+                                <td style="color:var(--warn)">₱47.0</td>
+                                <td style="color:var(--green)">3.7%</td>
+                                <td><span
+                                        style="color:var(--warn);font-size:0.6rem;letter-spacing:0.08em;font-weight:600">HIGH
+                                        STRESS</span></td>
+                            </tr>
+                            <tr>
+                                <td>2018 Oil Spike</td>
+                                <td>$86/bbl</td>
+                                <td style="color:var(--warn)">6.7%</td>
+                                <td style="color:var(--muted)">₱52.7</td>
+                                <td style="color:var(--green)">6.2%</td>
+                                <td><span
+                                        style="color:var(--muted);font-size:0.6rem;letter-spacing:0.08em;font-weight:600">ELEVATED</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2022 Post-Ukraine Shock</td>
+                                <td>$120/bbl</td>
+                                <td style="color:var(--warn)">8.1%</td>
+                                <td style="color:var(--warn)">₱58.9</td>
+                                <td style="color:var(--green)">7.6%*</td>
+                                <td><span
+                                        style="color:var(--warn);font-size:0.6rem;letter-spacing:0.08em;font-weight:600">HIGH
+                                        STRESS</span></td>
+                            </tr>
+                            <tr>
+                                <td>2026 Middle East War (now)</td>
+                                <td>$115/bbl</td>
+                                <td style="color:var(--warn)">~8–9% est.</td>
+                                <td style="color:var(--warn)">₱57.5</td>
+                                <td style="color:var(--green)">~4–5% est.</td>
+                                <td><span
+                                        style="color:var(--warn);font-size:0.6rem;letter-spacing:0.08em;font-weight:600">ONGOING</span>
+                                </td>
+                            </tr>
+                            <tr id="sim-history-row">
+                                <td id="sim-hist-label">YOUR SIMULATION</td>
+                                <td id="sim-hist-crude">—</td>
+                                <td id="sim-hist-inf">—</td>
+                                <td id="sim-hist-peso">—</td>
+                                <td id="sim-hist-gdp">—</td>
+                                <td id="sim-hist-verdict">—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="hist-note">
+                        * 2022 GDP growth was elevated by post-COVID recovery and is not representative of oil shock
+                        impact alone.
+                        Historical data sources: BSP Inflation Reports, PSA National Accounts, DOE Oil Price Bulletins.
+                        Simulation values reflect mean outcomes across 10,000 scenarios — individual runs will vary.
+                    </div>
                 </div>
 
                 <!-- INDICATORS -->
@@ -2550,16 +2869,18 @@
 
         const BASE = { inf: 4.2, peso: 57.5, gdp: 5.8 };
 
+        // Sensitivity per $10/bbl above $80 — calibrated to 2008/2022 PHL data
+        // Crisis tier reflects nonlinear pass-through at extreme prices
         const SENS = {
-            inf: { base: 0.60, ext: 0.85, crisis: 1.10 },
-            peso: { base: 0.55, ext: 0.80, crisis: 1.05 },
-            gdp: { base: -0.20, ext: -0.32, crisis: -0.45 },
+            inf: { base: 0.60, ext: 0.90, crisis: 1.40 },   // at $180: +14% inflation on top of base
+            peso: { base: 0.55, ext: 0.85, crisis: 1.35 },   // at $180: peso pushed toward ₱71+
+            gdp: { base: -0.20, ext: -0.35, crisis: -0.55 }, // at $180: GDP near 0 or below
         };
 
         const SIG = {
-            inf: { low: 0.30, medium: 0.70, high: 1.30 },
-            peso: { low: 0.60, medium: 1.50, high: 3.00 },
-            gdp: { low: 0.20, medium: 0.50, high: 1.00 },
+            inf: { low: 0.30, medium: 0.75, high: 1.40 },
+            peso: { low: 0.60, medium: 1.60, high: 3.20 },
+            gdp: { low: 0.20, medium: 0.55, high: 1.10 },
         };
 
         const THRESH = { inf: 10.0, peso: 80.0, gdp: 0.0 };
@@ -2812,14 +3133,19 @@
                     const s = simOne(crudePrice, horizon, volatility);
                     infs.push(s.inf); pesos.push(s.peso); gdps.push(s.gdp);
 
+                    // ── Composite Stress Index
+                    // Inflation weight raised to 0.45 — hits Filipinos fastest and hardest
+                    // Peso normalized to ₱75 (not ₱80) — severe stress begins before full breach
+                    // GDP weight 0.20 — serious but lags in short horizons
+                    // Collapse threshold 1.10 — reflects realistic emergency level
                     const infStress = s.inf / THRESH.inf;
-                    const pesoStress = s.peso / THRESH.peso;
+                    const pesoStress = s.peso / 75.0;   // normalized to ₱75 — already severe
                     const gdpStress = s.gdp >= 4.0 ? 0
                         : s.gdp >= 0 ? (4.0 - s.gdp) / 4.0
-                            : 1.0 + Math.min(Math.abs(s.gdp) / 6.0, 0.5);
-                    const stressScore = 0.40 * infStress + 0.35 * pesoStress + 0.25 * gdpStress;
-                    const collapsed = stressScore >= 1.25;
-                    const warned = !collapsed && stressScore >= 0.95;
+                            : 1.0 + Math.min(Math.abs(s.gdp) / 5.0, 0.5);
+                    const stressScore = 0.45 * infStress + 0.35 * pesoStress + 0.20 * gdpStress;
+                    const collapsed = stressScore >= 1.10;
+                    const warned = !collapsed && stressScore >= 0.85;
 
                     const bI = s.inf >= THRESH.inf;
                     const bP = s.peso >= THRESH.peso;
@@ -2865,7 +3191,7 @@
                 document.getElementById('prob-verdict').style.color = verd.color;
                 document.getElementById('prob-stats').innerHTML = `
                     <strong>${collapseCount.toLocaleString()}</strong> of ${N.toLocaleString()} scenarios triggered collapse<br>
-                    Collapse = weighted stress score ≥ 1.25 (inflation×0.40 + peso×0.35 + gdp×0.25)<br><br>
+                    Collapse = weighted stress score ≥ 1.10 (inflation×0.45 + peso×0.35 + gdp×0.20)<br><br>
                     Inflation danger zone breached in <strong>${(infB / N * 100).toFixed(1)}%</strong> of runs<br>
                     Peso/USD danger zone breached in <strong>${(pesoB / N * 100).toFixed(1)}%</strong> of runs<br>
                     GDP contraction in <strong>${(gdpB / N * 100).toFixed(1)}%</strong> of runs<br>
@@ -2875,6 +3201,56 @@
                 document.getElementById('summary-body').innerHTML = generateSummary(crudePrice, horizon, volatility, collapseProb, mInf, mPeso, mGdp);
                 const sc = document.getElementById('summary-card');
                 sc.style.borderLeftColor = collapseProb >= 75 ? 'var(--red)' : collapseProb >= 35 ? 'var(--warn)' : 'var(--accent)';
+
+                // ── Score Breakdown Panel
+                const meanInfStress = mInf / THRESH.inf;
+                const meanPesoStress = mPeso / 75.0;
+                const meanGdpStress = mGdp >= 4.0 ? 0 : mGdp >= 0 ? (4.0 - mGdp) / 4.0 : 1.0 + Math.min(Math.abs(mGdp) / 5.0, 0.5);
+                const meanScore = 0.45 * meanInfStress + 0.35 * meanPesoStress + 0.20 * meanGdpStress;
+                const infContrib = 0.45 * meanInfStress;
+                const pesoContrib = 0.35 * meanPesoStress;
+                const gdpContrib = 0.20 * meanGdpStress;
+                const scoreColor = meanScore >= 1.10 ? 'var(--red)' : meanScore >= 0.85 ? 'var(--warn)' : 'var(--green)';
+                const ci95 = (1.96 * Math.sqrt(collapseProb / 100 * (1 - collapseProb / 100) / N) * 100).toFixed(1);
+
+                document.getElementById('bd-inf-val').textContent = mInf.toFixed(2) + '%';
+                document.getElementById('bd-inf-stress').textContent = meanInfStress.toFixed(3);
+                document.getElementById('bd-inf-contrib').textContent = infContrib.toFixed(3);
+                document.getElementById('bd-inf-contrib').style.color = infContrib >= 0.45 ? 'var(--red)' : infContrib >= 0.30 ? 'var(--warn)' : 'var(--green)';
+
+                document.getElementById('bd-peso-val').textContent = '₱' + mPeso.toFixed(2);
+                document.getElementById('bd-peso-stress').textContent = meanPesoStress.toFixed(3);
+                document.getElementById('bd-peso-contrib').textContent = pesoContrib.toFixed(3);
+                document.getElementById('bd-peso-contrib').style.color = pesoContrib >= 0.35 ? 'var(--red)' : pesoContrib >= 0.25 ? 'var(--warn)' : 'var(--green)';
+
+                document.getElementById('bd-gdp-val').textContent = mGdp.toFixed(2) + '%';
+                document.getElementById('bd-gdp-stress').textContent = meanGdpStress.toFixed(3);
+                document.getElementById('bd-gdp-contrib').textContent = gdpContrib.toFixed(3);
+                document.getElementById('bd-gdp-contrib').style.color = gdpContrib >= 0.18 ? 'var(--red)' : gdpContrib >= 0.12 ? 'var(--warn)' : 'var(--green)';
+
+                document.getElementById('breakdown-total').textContent = `TOTAL: ${meanScore.toFixed(3)}`;
+                document.getElementById('breakdown-total').style.color = scoreColor;
+
+                const verdictText = meanScore >= 1.10 ? 'COLLAPSE ✓' : meanScore >= 0.85 ? 'WARNING' : 'STABLE';
+                document.getElementById('breakdown-formula').innerHTML = `
+                    Score = (${mInf.toFixed(2)}% ÷ 10.0) × 0.45 &nbsp;+&nbsp; (₱${mPeso.toFixed(2)} ÷ ₱75.0) × 0.35 &nbsp;+&nbsp; ${meanGdpStress.toFixed(3)} × 0.20<br>
+                    Score = <strong>${infContrib.toFixed(3)}</strong> + <strong>${pesoContrib.toFixed(3)}</strong> + <strong>${gdpContrib.toFixed(3)}</strong>
+                    = <strong style="color:${scoreColor};font-size:0.75rem">${meanScore.toFixed(3)}</strong>
+                    &nbsp;·&nbsp; Threshold: 1.10
+                    &nbsp;·&nbsp; <span class="verdict" style="color:${scoreColor}">${verdictText}</span><br>
+                    Monte Carlo collapse probability: <strong>${collapseProb.toFixed(1)}%</strong>
+                    &nbsp;·&nbsp; 95% CI: ±${ci95}% &nbsp;·&nbsp; N = ${N.toLocaleString()} scenarios
+                `;
+
+                // ── Historical Anchors — simulation row
+                const simVerdColor = collapseProb >= 60 ? 'var(--red)' : collapseProb >= 25 ? 'var(--warn)' : 'var(--green)';
+                const simVerdText = collapseProb >= 60 ? 'CRITICAL' : collapseProb >= 25 ? 'HIGH STRESS' : 'ELEVATED';
+                document.getElementById('sim-hist-label').textContent = `YOUR SIM ($${crudePrice}/bbl, ${horizon}mo)`;
+                document.getElementById('sim-hist-crude').textContent = `$${crudePrice}/bbl`;
+                document.getElementById('sim-hist-inf').innerHTML = `<span style="color:${mInf >= 10 ? 'var(--red)' : mInf >= 6 ? 'var(--warn)' : 'var(--green)'}">${mInf.toFixed(1)}%</span>`;
+                document.getElementById('sim-hist-peso').innerHTML = `<span style="color:${mPeso >= 75 ? 'var(--red)' : mPeso >= 65 ? 'var(--warn)' : 'var(--muted)'}">₱${mPeso.toFixed(1)}</span>`;
+                document.getElementById('sim-hist-gdp').innerHTML = `<span style="color:${mGdp <= 0 ? 'var(--red)' : mGdp <= 2 ? 'var(--warn)' : 'var(--green)'}">${mGdp.toFixed(1)}%</span>`;
+                document.getElementById('sim-hist-verdict').innerHTML = `<span style="color:${simVerdColor};font-size:0.6rem;letter-spacing:0.08em;font-weight:600">${simVerdText}</span>`;
 
                 function setInd(key, meanVal, vals, thresh, isLower, unit, barMin, barMax, dotId, meanId, rangeId, barId, markerPct, breachId) {
                     const breachPct = isLower ? (vals.filter(v => v <= thresh).length / N * 100) : (vals.filter(v => v >= thresh).length / N * 100);
@@ -2913,17 +3289,19 @@
                     const cP = +s.peso >= THRESH.peso ? 'color:var(--red)' : +s.peso >= 74 ? 'color:var(--warn)' : '';
                     const cG = +s.gdp <= THRESH.gdp ? 'color:var(--red)' : +s.gdp <= 1.5 ? 'color:var(--warn)' : '';
                     const sv = +s.score;
-                    const cS = sv >= 1.25 ? 'color:var(--red)' : sv >= 0.95 ? 'color:var(--warn)' : 'color:var(--green)';
+                    const cS = sv >= 1.10 ? 'color:var(--red)' : sv >= 0.85 ? 'color:var(--warn)' : 'color:var(--green)';
                     tbody.innerHTML += `<tr><td style="color:var(--muted)">${String(i + 1).padStart(2, '0')}</td><td>$${s.crude}</td><td style="${cI}">${s.inf}%</td><td style="${cP}">₱${s.peso}</td><td style="${cG}">${s.gdp}%</td><td style="${cS};font-weight:600">${s.score}</td><td>${badge}</td></tr>`;
                 });
                 document.getElementById('log-count').textContent = `${samples.filter(s => s.collapsed).length} COLLAPSES IN SAMPLE`;
 
                 setTimeout(() => document.getElementById('prob-card').classList.add('visible'), 100);
                 setTimeout(() => document.getElementById('summary-card').classList.add('visible'), 250);
-                ['ind-inf', 'ind-peso', 'ind-gdp'].forEach((id, i) => setTimeout(() => document.getElementById(id).classList.add('visible'), 400 + i * 80));
-                setTimeout(() => document.getElementById('fan-card').classList.add('visible'), 650);
-                ['dist-inf', 'dist-peso', 'dist-gdp'].forEach((id, i) => setTimeout(() => document.getElementById(id).classList.add('visible'), 800 + i * 80));
-                setTimeout(() => document.getElementById('log-card').classList.add('visible'), 900);
+                setTimeout(() => document.getElementById('breakdown-card').classList.add('visible'), 380);
+                setTimeout(() => document.getElementById('history-card').classList.add('visible'), 480);
+                ['ind-inf', 'ind-peso', 'ind-gdp'].forEach((id, i) => setTimeout(() => document.getElementById(id).classList.add('visible'), 580 + i * 80));
+                setTimeout(() => document.getElementById('fan-card').classList.add('visible'), 800);
+                ['dist-inf', 'dist-peso', 'dist-gdp'].forEach((id, i) => setTimeout(() => document.getElementById(id).classList.add('visible'), 950 + i * 80));
+                setTimeout(() => document.getElementById('log-card').classList.add('visible'), 1100);
 
                 btn.disabled = false;
                 btn.textContent = '↺ RE-RUN';
